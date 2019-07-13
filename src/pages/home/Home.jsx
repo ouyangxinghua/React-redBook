@@ -11,16 +11,16 @@ import './home.styl';
 class Home extends Component {
   state = {
     headList: ['关注', '发现', '南昌'],
-    currentTab: 1,
+    currentTab: 0,
   }
   componentDidMount() {
     var _this = this;
     if (!this.mySwiper) {
       this.mySwiper = new Swiper('#swiper1', {
         resistanceRatio: 0,
-        initialSlide: 2,
+        initialSlide: 0,
         autoHeight: true,
-        effect : 'flip',
+        effect : 'coverflow',
         on: {
           slideChangeTransitionStart: function () {
             let index = this.activeIndex;
@@ -69,8 +69,7 @@ class Home extends Component {
         <div className="swiper-container" id="swiper1">
           <div className="swiper-wrapper">
             <div className="swiper-slide">
-              {/* <Focus /> */}
-              <img src="http://img0.imgtn.bdimg.com/it/u=3202539744,76575858&fm=26&gp=0.jpg" alt="" />
+              <Focus />
             </div>
             <div className="swiper-slide">
               <Found />
