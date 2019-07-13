@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import './focus.styl';
+import './city.styl';
 
-class Focus extends Component {
+class City extends Component {
   state = {  }
   render() { 
     return ( 
       <div>
-        focus
+        city
       </div>
     );
   }
-}
- 
-export default Focus;
+} 
+
+export default City

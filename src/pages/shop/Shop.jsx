@@ -5,7 +5,7 @@ class Shop extends Component {
   state = {  }
   render() { 
     return ( 
-      <div>
+      <div className="shop-container">
         shop
       </div>
     );

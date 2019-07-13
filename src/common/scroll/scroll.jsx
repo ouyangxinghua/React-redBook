@@ -34,5 +34,4 @@ class Scroll extends Component {
     );
   }
 }
- 
-export default Scroll;
+export default Scroll

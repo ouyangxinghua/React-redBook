@@ -3,10 +3,10 @@ import React, { Component } from 'react';
 import Swiper from 'swiper/dist/js/swiper.js'
 import 'swiper/dist/css/swiper.min.css'
 // import Scroll from '../../common/scroll/scroll'
+import City from '../../components/city/City'
+import Found from '../../components/found/Found'
+import Focus from '../../components/focus/Focus'
 import './home.styl';
-import Focus from './focus/Focus';
-import City from './city/City';
-import Found from './found/Found'
 
 class Home extends Component {
   state = {
@@ -14,15 +14,24 @@ class Home extends Component {
     currentTab: 1,
   }
   componentDidMount() {
+    var _this = this;
     if (!this.mySwiper) {
       this.mySwiper = new Swiper('.swiper-container', {
         resistanceRatio: 0,
-        initialSlide :1
+        initialSlide: 1,
+        on: {
+          slideChangeTransitionStart: function () {
+            let index = this.activeIndex;
+            _this.setState({
+              currentTab: index
+            })
+          },
+        },
       })
     }
   }
   toSlideItem = (index) => {
-    console.log(index)
+    // console.log(index)
     this.mySwiper.slideTo(index, 300, false);
     this.setState({
       currentTab: index
@@ -40,11 +49,11 @@ class Home extends Component {
             {
               headList.map((item, index) => {
                 return (
-                  <div className="nav-link" key={index} 
-                  onClick={() => this.toSlideItem(index)} 
-                  className={index === this.state.currentTab ? 'bottom' : ''}
+                  <div key={index}
+                    onClick={() => this.toSlideItem(index)}
+                    className={index === this.state.currentTab ? 'bottom' : 'nav-link'}
                   >
-                    <span className={ index ===1 ? 'two' : ''}>{item}</span>
+                    <span className={index === 1 ? 'two' : ''}>{item}</span>
                   </div>
                 )
               })
@@ -62,10 +71,10 @@ class Home extends Component {
               <img src="http://img0.imgtn.bdimg.com/it/u=3202539744,76575858&fm=26&gp=0.jpg" alt="" />
             </div>
             <div className="swiper-slide">
-              <City />
+              <Found />
             </div>
             <div className="swiper-slide">
-              <Found />
+              <City />
             </div>
           </div>
           <div className="swiper-pagination"></div>

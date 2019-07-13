@@ -29,13 +29,10 @@ function App() {
           </div>
         </div>
         <div className="redBook-main">
-          <Switch>
-            <Route path="/" component={Home} />
             <Route path="/home" component={Home} />
             <Route path="/shop" component={Shop} />
             <Route path="/message" component={Message} />
             <Route path="/mine" component={Mine} />
-          </Switch>
         </div>
       </div>
     </Router>

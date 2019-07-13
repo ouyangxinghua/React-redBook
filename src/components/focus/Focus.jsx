@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
+import './focus.styl';
 
-class PeopleCard extends Component {
+class Focus extends Component {
   state = {  }
   render() { 
     return ( 
-      <div className="container">
-
+      <div>
+        focus
       </div>
     );
   }
 }
- 
-export default PeopleCard;
+
+export default Focus
