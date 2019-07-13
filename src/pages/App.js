@@ -29,6 +29,7 @@ function App() {
           </div>
         </div>
         <div className="redBook-main">
+            <Route exact path="/" component={Home} />
             <Route path="/home" component={Home} />
             <Route path="/shop" component={Shop} />
             <Route path="/message" component={Message} />
