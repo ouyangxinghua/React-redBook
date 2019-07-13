@@ -16,9 +16,11 @@ class Home extends Component {
   componentDidMount() {
     var _this = this;
     if (!this.mySwiper) {
-      this.mySwiper = new Swiper('.swiper-container', {
+      this.mySwiper = new Swiper('#swiper1', {
         resistanceRatio: 0,
-        initialSlide: 1,
+        initialSlide: 2,
+        autoHeight: true,
+        effect : 'flip',
         on: {
           slideChangeTransitionStart: function () {
             let index = this.activeIndex;
@@ -43,7 +45,7 @@ class Home extends Component {
       <div className="home-container">
         <div className="header">
           <div className="button">
-            <img src={[require("../../assets/images/按钮.png")]} alt="" />
+            <img src={[require("../../assets/city/top.png")]} alt="" />
           </div>
           <div className="tab-item">
             {
@@ -64,7 +66,7 @@ class Home extends Component {
             <span>大家都在搜"悬疑电影"</span>
           </div>
         </div>
-        <div className="swiper-container">
+        <div className="swiper-container" id="swiper1">
           <div className="swiper-wrapper">
             <div className="swiper-slide">
               {/* <Focus /> */}

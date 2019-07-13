@@ -5,7 +5,9 @@ import PeopleCard from '../../common/peopleCard/peopleCard'
 class CardList extends Component {
   state = {}
   render() {
+    console.log('cardList')
     const { list, type } = this.props;
+    // console.log(list, type)
     return (
       <div className="list-container">
         <div className="left">
