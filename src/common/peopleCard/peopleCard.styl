@@ -6,6 +6,7 @@
   margin-bottom 5px
   .card-pic 
     width 100%
+    
     .headPic 
       border-top-left-radius 5px
       border-top-right-radius 5px
@@ -20,12 +21,15 @@
     width 100%
     box-sizing border-box
     padding 10px 8px 10px 8px
-    .title
-      font-weight 500
+    .title-con
+      position relative
       font-size 13px
-      word-wrap break-word
+      font-weight 500
       line-height 1.2
-      margin-bottom 8px
+      min-height 28px
+      .title
+        overflow hidden
+        text-overflow ellipsis
     .bottom
       display flex
       justify-content flex-start

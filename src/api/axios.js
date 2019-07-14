@@ -27,7 +27,3 @@ export function fetchGet(url){
     })
   })
 }
-
-// export default {
-//   fetchGet
-// }

@@ -14,13 +14,14 @@ class Scroll extends Component {
   componentDidMount() {
     if (!this.bscroll){
       this.bscroll = new BScroll(this.refs.scrollView, {
+        // eventPassthrough: 'horizontal',
         probeType: 3,
         click: () => {}
       })
-      // this.bscroll.on('scroll', (e) => {
-      //   // console.log(e)
-      //   this.props.onScroll(e)
-      // })
+      this.bscroll.on('scroll', (e) => {
+        // console.log(e)
+        this.props.onScroll(e)
+      })
     }
   }
   componentWillUnmount(){

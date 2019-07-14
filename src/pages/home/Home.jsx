@@ -9,16 +9,19 @@ import Focus from '../../components/focus/Focus'
 import './home.styl';
 
 class Home extends Component {
-  state = {
-    headList: ['关注', '发现', '南昌'],
-    currentTab: 0,
+  constructor(props) {
+    super(props)
+    this.state = {
+      headList: ['关注', '发现', '南昌'],
+      currentTab: 1,
+    }
   }
   componentDidMount() {
     var _this = this;
     if (!this.mySwiper) {
       this.mySwiper = new Swiper('#swiper1', {
         resistanceRatio: 0,
-        initialSlide: 0,
+        initialSlide: 1,
         autoHeight: true,
         effect : 'coverflow',
         on: {
