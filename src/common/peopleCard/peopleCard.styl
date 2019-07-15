@@ -6,7 +6,6 @@
   margin-bottom 5px
   .card-pic 
     width 100%
-    
     .headPic 
       border-top-left-radius 5px
       border-top-right-radius 5px
@@ -26,14 +25,19 @@
       font-size 13px
       font-weight 500
       line-height 1.2
-      min-height 28px
+      min-height 20px
       .title
-        overflow hidden
-        text-overflow ellipsis
+        word-break: break-all;
+        text-overflow: ellipsis;
+        display: -webkit-box; /** 对象作为伸缩盒子模型显示 **/
+        -webkit-box-orient: vertical; /** 设置或检索伸缩盒对象的子元素的排列方式 **/
+        -webkit-line-clamp: 2; /** 显示的行数 **/
+        overflow: hidden;  /** 隐藏超出的内容 **/
     .bottom
       display flex
       justify-content flex-start
       align-items center
+      margin-top 5px
       .avatar
         width 25px
         height 25px

@@ -10,7 +10,7 @@ class Loading extends Component {
       <div className="loading-container" style={{display: show ? '' : 'none'}}>
         <div className="loading-wrapper">
           <div className="loading-wrapper-img">
-            <img src={loadingImg} width="100%" height="100%" alt=""/>
+            <img src={loadingImg} alt=""/>
           </div>
           <div className="loading-title">
             { title }

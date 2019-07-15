@@ -11,7 +11,7 @@ class City extends Component {
     header: [],
     show: true
   }
-  componentWillMount() {
+  componentDidMount() {
     fetchGet('/city').then((res) => {
       console.log(res.data.listData)
       this.setState({

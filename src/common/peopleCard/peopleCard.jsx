@@ -15,14 +15,12 @@ class PeopleCard extends Component {
     })
   }
   render() {
-    console.log('3')
     const { item, type } = this.props;
-    // console.log(type)
     const { isStar } = this.state;
     return (
       <div className="card-container">
         <div className="card-pic">
-          <Lazyload height={200}>
+          <Lazyload height={200} width={172}>
             <img src={item.headPic} alt="" className="headPic" />
           </Lazyload>
           <img src={[require("../../assets/images/播放.png")]} alt="" className="isVideo" style={item.isVideo ? {} : { display: 'none' }} />

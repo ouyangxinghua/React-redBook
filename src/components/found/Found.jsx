@@ -13,7 +13,7 @@ class Found extends Component {
       listData: {},
     }
   };
-  componentWillMount() {
+  componentDidMount() {
     fetchGet('/found').then((res) => {
       console.log(res.data.listData)
       this.setState({
@@ -24,6 +24,7 @@ class Found extends Component {
   }
   render() {
     const { type, listData = {}, show } = this.state
+    console.log(listData)
     return (
       show ? <Loading title="正在加载中..." show={this.state.show}></Loading> :
       <div className="Found-container">

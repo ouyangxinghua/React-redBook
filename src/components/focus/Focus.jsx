@@ -10,7 +10,7 @@ class Focus extends Component {
     header: [],
     show: true
   }
-  componentWillMount() {
+  componentDidMount() {
     fetchGet('/focus').then((res) => {
       console.log(res.data.listData)
       this.setState({
