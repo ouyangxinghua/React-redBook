@@ -1,4 +1,5 @@
 .shop-container
+  position relative
   box-sizing border-box
   width 100%
   background-color #f4f9f8
@@ -13,7 +14,7 @@
     align-items: center
     border-radius 50%
     background-color rgba(0,0,0,0.8)
-    z-index 9999
+    z-index 3
     img 
       width 22px
       height 22px
@@ -27,7 +28,7 @@
     display: flex
     justify-content space-around
     align-items: center
-    z-index 9999
+    z-index 4
     border: 1px solid rgba(0,0,0,0.1)
     .left
       width 18px
@@ -113,7 +114,7 @@
           top 19px
           left 50%
           transform translateX(-50%)
-          z-index 9999
+          z-index 3
 .shop-goods__itemList
   width 100%
   position relative
@@ -130,5 +131,5 @@
     position: fixed;
     height 40px
     top: 45px;
-    z-index 99999
+    z-index 3
     background-color #fff

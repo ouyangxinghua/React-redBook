@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Route, NavLink } from 'react-router-dom';
-import Swiper from 'swiper/dist/js/swiper.js'
-import 'swiper/dist/css/swiper.min.css'
+import { Route } from 'react-router-dom';
+import Swiper from 'swiper'; 
+import 'swiper/dist/css/swiper.css';
 // import Scroll from '../../common/scroll/scroll'
 import City from '../../components/city/City'
 import Found from '../../components/found/Found'
@@ -14,6 +14,9 @@ class Home extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      SearchTitle: [
+        '男生国潮穿搭'
+      ],
       headList: ['关注', '发现', '南昌'],
       currentTab: 1,
     }
@@ -45,13 +48,13 @@ class Home extends Component {
   }
   navToSearch = (url) => {
     this.props.history.push({
-      pathname: url
+      pathname: url,
+      query : { title: this.state.SearchTitle}
     })
   }
   render() {
     const { headList } = this.state
     const { match } = this.props;
-    // console.log(match);
     return (
         <div className="home-container">
           <div className="header">
@@ -74,7 +77,7 @@ class Home extends Component {
             </div>
             <div className="search-nav" onClick={() => this.navToSearch(`${match.url}/hometoSearch`)}>
               <img src={[require("../../assets/images/搜索.png")]} alt="" className="search-icon" />
-              <span>大家都在搜"悬疑电影"</span>
+              <span>大家都在搜"{this.state.SearchTitle}"</span>
             </div>
           </div>
           <div className="swiper-container" id="swiper1">
@@ -91,7 +94,7 @@ class Home extends Component {
             </div>
             <div className="swiper-pagination"></div>
           </div>
-          <Route path={`${match.url}/:id`} component={SearchBox} />
+          <Route path={`${match.url}/hometoSearch`} component={SearchBox}></Route>
         </div>
     );
   }

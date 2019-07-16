@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
-import Swiper from 'swiper/dist/js/swiper.js'
-import 'swiper/dist/css/swiper.min.css'
+import Swiper from 'swiper'; 
+import 'swiper/dist/css/swiper.css';
 import { fetchGet } from '../../api/axios'
 import Loading from '../../common/loading/loading'
 import './shop.styl';
+import SideBar from '../../common/sidebar/sidebar'
 
 class Shop extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      showSidebar: false,
       isScrollTop: false,
       show: true,
       swiper: [],
@@ -20,7 +22,7 @@ class Shop extends Component {
   }
   componentDidMount() {
     console.log(this.current)
-    var _this = this;
+    // var _this = this;
     this.windowOnScroll();
     fetchGet('/shop').then((res) => {
       this.setState({
@@ -87,6 +89,16 @@ class Shop extends Component {
       currentTap: index
     })
   }
+  showSidebar() {
+    this.setState({
+      showSidebar: true
+    })
+  }
+  getChildState(show) {
+    this.setState({
+      showSidebar: show
+    })
+  }
   render() {
     const { swiper, show, header, currentTap } = this.state;
     return (
@@ -95,7 +107,7 @@ class Shop extends Component {
           <img src={[require("../../assets/images/购物车.png")]} alt="" />
         </div>
         <div className="shop-header">
-          <div className="left">
+          <div className="left" onClick={() => this.showSidebar()}>
             <img src={[require("../../assets/images/三根线.png")]} alt="" />
           </div>
           <div className="search">
@@ -176,6 +188,7 @@ class Shop extends Component {
               </div>
           }
         </div>
+        <SideBar show={this.state.showSidebar} getState={this.getChildState.bind(this)} />
       </div>
     );
   }

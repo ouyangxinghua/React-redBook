@@ -15,7 +15,7 @@ class PeopleCard extends Component {
     })
   }
   render() {
-    const { item, type } = this.props;
+    const { item } = this.props;
     const { isStar } = this.state;
     return (
       <div className="card-container">

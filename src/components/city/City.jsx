@@ -13,7 +13,7 @@ class City extends Component {
   }
   componentDidMount() {
     fetchGet('/city').then((res) => {
-      console.log(res.data.listData)
+      // console.log(res.data.listData)
       this.setState({
         listData: res.data.listData,
         header: res.data.header,
