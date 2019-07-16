@@ -7,16 +7,17 @@ class searchBox extends Component {
   state = {
     value: '',
     placeholder: '',
-    SearchHistory: ['sdk','sdjfgdfg', 'dsfssfdsfds', 'dsfdsfdsfds', 'fdsfdsfsd']
+    SearchHistory: []
   }
   componentDidMount() {
+    let getItem =  (localStorage.getItem("title") && localStorage.getItem("title").split(',').reverse()) || []
     this.setState({
-      placeholder: this.props.location.query.title
+      placeholder: (this.props.location.query && this.props.location.query.title) || '请输入内容',
+      SearchHistory: getItem
     })
   }
   onChange= (value) => {
     this.setState({ value });
-    console.log('djkfsldj')
   };
   clear = () => {
     this.setState({ value: '' });
@@ -28,10 +29,28 @@ class searchBox extends Component {
     console.log('onBlur' ,value)
   }
   onSubmit = (value) => {
-    console.log('onSubmit' ,value)
+    let history = (localStorage.getItem("title") && localStorage.getItem("title").split(',')) || []
+    let isExist = history.some((item) => {
+      return item === value
+    })
+    if (!isExist){
+      history.push(value)
+      localStorage.setItem("title", history)
+    }
+    let getItem =  (localStorage.getItem("title") && localStorage.getItem("title").split(',').reverse()) || []
+    this.setState({
+      SearchHistory: getItem,
+      value: ''
+    })
   }
   handleback = () => {
     window.history.back();
+  }
+  clearStorage = () => {
+    localStorage.clear();
+    this.setState({ 
+      SearchHistory: []
+    });
   }
   render() {
     const { SearchHistory } = this.state;
@@ -43,7 +62,7 @@ class searchBox extends Component {
             value={this.state.value}
             placeholder={this.state.placeholder}
             onSubmit={value => this.onSubmit(value)}
-            onClear={value => this.onClear(value)}
+            onClear={value => this.clear(value)}
             onFocus={() => this.onFocus}
             onBlur={() => this.onBlur}
             onCancel={() => this.Cancel()}
@@ -53,7 +72,8 @@ class searchBox extends Component {
         </div>
         <div className="Search-history">
           <p>历史记录</p>
-          <img src={[require("../../assets/images/laji.png")]} alt="" className="Search-history__icon"/>
+          <img src={[require("../../assets/images/laji.png")]} alt="" className="Search-history__icon"
+          onClick={this.clearStorage}/>
           <div className="Search-history__items">
             {
               SearchHistory.map((item, index) => {

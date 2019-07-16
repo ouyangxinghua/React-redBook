@@ -4,7 +4,7 @@ import Home from './home/Home';
 import Shop from './shop/Shop';
 import Message from './message/Message';
 import Mine from './mine/Mine';
-
+import Sort from '../components/sort/Sort'
 import './App.styl';
 
 class App extends Component {
@@ -35,6 +35,7 @@ class App extends Component {
               <Route path="/shop" component={Shop} />
               <Route path="/message" component={Message} />
               <Route path="/mine" component={Mine} />
+              <Route path="/shop/sort" component={Sort}></Route>
               <Route path="/" render={() => {
                 return false ?
                   <div>home</div> : <Redirect to={{

@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
+import SearchBox from '../../common/searchBox/searchBox'
 import Swiper from 'swiper'; 
 import 'swiper/dist/css/swiper.css';
 import { fetchGet } from '../../api/axios'
@@ -10,6 +12,9 @@ class Shop extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      SearchTitle: [
+        '出游吸睛穿搭'
+      ],
       showSidebar: false,
       isScrollTop: false,
       show: true,
@@ -21,8 +26,6 @@ class Shop extends Component {
     this.current = 0
   }
   componentDidMount() {
-    console.log(this.current)
-    // var _this = this;
     this.windowOnScroll();
     fetchGet('/shop').then((res) => {
       this.setState({
@@ -99,8 +102,21 @@ class Shop extends Component {
       showSidebar: show
     })
   }
+  navToSearch = (url) => {
+    this.props.history.push({
+      pathname: url,
+      query : { title: this.state.SearchTitle}
+    })
+  }
+  navToSort = () => {
+    this.props.history.push({
+      pathname: '/shop/sort',
+      query : { content: '欧阳兴华'}
+    })
+  }
   render() {
     const { swiper, show, header, currentTap } = this.state;
+    const { match } = this.props;
     return (
       <div className="shop-container">
         <div className="shop-card__icon">
@@ -110,11 +126,11 @@ class Shop extends Component {
           <div className="left" onClick={() => this.showSidebar()}>
             <img src={[require("../../assets/images/三根线.png")]} alt="" />
           </div>
-          <div className="search">
+          <div className="search" onClick={() => this.navToSearch(`${match.url}/shoptoSearch`)}>
             <img src={[require("../../assets/images/搜索.png")]} alt="" />
-            <span>大家都在搜"出游吸睛穿搭"</span>
+            <span>大家都在搜"{this.state.SearchTitle}"</span>
           </div>
-          <div className="right">
+          <div className="right" onClick={() => this.navToSort()}>
             <img src={[require("../../assets/images/分类3.png")]} width="18px" height="18px" alt="" />
             <span>分类</span>
           </div>
@@ -189,6 +205,7 @@ class Shop extends Component {
           }
         </div>
         <SideBar show={this.state.showSidebar} getState={this.getChildState.bind(this)} />
+        <Route path={`${match.url}/shoptoSearch`} component={SearchBox}></Route>
       </div>
     );
   }
