@@ -10,11 +10,15 @@ class searchBox extends Component {
     SearchHistory: []
   }
   componentDidMount() {
+    this.props.hideTabbar(false)
     let getItem =  (localStorage.getItem("title") && localStorage.getItem("title").split(',').reverse()) || []
     this.setState({
       placeholder: (this.props.location.query && this.props.location.query.title) || '请输入内容',
       SearchHistory: getItem
     })
+  }
+  componentWillUnmount(){
+    this.props.hideTabbar(true)
   }
   onChange= (value) => {
     this.setState({ value });
@@ -90,4 +94,5 @@ class searchBox extends Component {
     );
   }
 }
-export default searchBox
+
+export default searchBox;

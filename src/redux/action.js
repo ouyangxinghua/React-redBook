@@ -1,1 +1,5 @@
-import * as ActionType from './actionTypes';
+export function hidetarbar(status){
+  return {
+    type: "HIDE_TABBAR", status
+  }
+}

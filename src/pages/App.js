@@ -4,38 +4,45 @@ import Home from './home/Home';
 import Shop from './shop/Shop';
 import Message from './message/Message';
 import Mine from './mine/Mine';
-import Sort from '../components/sort/Sort'
+import Sort from '../containers/Sort'
 import './App.styl';
+import { connect } from 'react-redux';
 
 class App extends Component {
+  componentDidMount() {
+    console.log(this.props.showTarbar)
+  }
   render() {
     return (
       <Router>
         <div className="App">
-          <div className="tabbar">
-            <div className="nav-link">
-              <NavLink to="/home" activeClassName="selected">首页</NavLink>
-            </div>
-            <div className="nav-link">
-              <NavLink to="/shop" activeClassName="selected">商城</NavLink>
-            </div>
-            <button className="open-file">
-              <img src={[require("../assets/images/添加.png")]} alt="" />
-            </button>
-            <div className="nav-link">
-              <NavLink to="/message" activeClassName="selected">消息</NavLink>
-            </div>
-            <div className="nav-link">
-              <NavLink to="/mine" activeClassName="selected">我</NavLink>
-            </div>
-          </div>
+          {
+            !this.props.showTarbar ? <div></div> :
+              <div className="tabbar">
+                <div className="nav-link">
+                  <NavLink to="/home" activeClassName="selected">首页</NavLink>
+                </div>
+                <div className="nav-link">
+                  <NavLink to="/shop" activeClassName="selected">商城</NavLink>
+                </div>
+                <button className="open-file">
+                  <img src={[require("../assets/images/添加.png")]} alt="" />
+                </button>
+                <div className="nav-link">
+                  <NavLink to="/message" activeClassName="selected">消息</NavLink>
+                </div>
+                <div className="nav-link">
+                  <NavLink to="/mine" activeClassName="selected">我</NavLink>
+                </div>
+              </div>
+          }
           <div className="redBook-main">
             <Switch>
               <Route path="/home" component={Home}></Route>
               <Route path="/shop" component={Shop} />
               <Route path="/message" component={Message} />
               <Route path="/mine" component={Mine} />
-              <Route path="/shop/sort" component={Sort}></Route>
+              <Route path="/sort" component={Sort}></Route>
               <Route path="/" render={() => {
                 return false ?
                   <div>home</div> : <Redirect to={{
@@ -49,5 +56,10 @@ class App extends Component {
     );
   }
 }
+const mapStateToProps = (state) => {
+  return {
+    showTarbar: state.showTarbar
+  }
+}
 
-export default App;
+export default connect(mapStateToProps)(App);

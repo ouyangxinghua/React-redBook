@@ -8,7 +8,7 @@ import Found from '../../components/found/Found'
 import Focus from '../../components/focus/Focus'
 import './home.styl';
 import { forceCheck } from 'react-lazyload';
-import SearchBox from '../../common/searchBox/searchBox'
+import SearchBox from '../../containers/searchBox'
 
 class Home extends Component {
   constructor(props) {
