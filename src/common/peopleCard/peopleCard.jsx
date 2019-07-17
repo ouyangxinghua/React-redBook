@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Lazyload from 'react-lazyload';
 import './peopleCard.styl'
+import { withRouter } from 'react-router-dom'
 
 class PeopleCard extends Component {
   constructor(props){
@@ -14,11 +15,17 @@ class PeopleCard extends Component {
       isStar: !this.state.isStar
     })
   }
+  NavToDetail = (url) => {
+    this.props.history.push({
+      pathname: url,
+      query: {data: this.props.item}
+    })
+  }
   render() {
     const { item } = this.props;
     const { isStar } = this.state;
     return (
-      <div className="card-container">
+      <div className="card-container" onClick={() => this.NavToDetail(`peopleDetail/${item.userId}`)}>
         <div className="card-pic">
           <Lazyload height={200} width={172}>
             <img src={item.headPic} alt="" className="headPic" />
@@ -51,4 +58,4 @@ class PeopleCard extends Component {
   }
 }
 
-export default PeopleCard
+export default withRouter(PeopleCard)

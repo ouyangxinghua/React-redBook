@@ -4,14 +4,12 @@ import Home from './home/Home';
 import Shop from './shop/Shop';
 import Message from './message/Message';
 import Mine from './mine/Mine';
-import Sort from '../containers/Sort'
+import Sort from '../containers/Sort';
+import peopleDetail from '../containers/peopleDetail'
 import './App.styl';
 import { connect } from 'react-redux';
 
 class App extends Component {
-  componentDidMount() {
-    console.log(this.props.showTarbar)
-  }
   render() {
     return (
       <Router>
@@ -38,15 +36,16 @@ class App extends Component {
           }
           <div className="redBook-main">
             <Switch>
-              <Route path="/home" component={Home}></Route>
+              <Route path="/home" component={Home} />
               <Route path="/shop" component={Shop} />
               <Route path="/message" component={Message} />
               <Route path="/mine" component={Mine} />
-              <Route path="/sort" component={Sort}></Route>
+              <Route path="/sort" component={Sort} />
+              <Route path="/peopleDetail/:id" component={peopleDetail} />
               <Route path="/" render={() => {
                 return false ?
                   <div>home</div> : <Redirect to={{
-                    pathname: '/shop',
+                    pathname: '/home',
                   }} />
               }}></Route>
             </Switch>

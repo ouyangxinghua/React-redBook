@@ -109,6 +109,7 @@ class Shop extends Component {
     })
   }
   navToSort = () => {
+    console.log(this.props.history)
     this.props.history.push({
       pathname: '/sort'
     })
