@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-import SearchBox from '../../common/searchBox/searchBox'
+import SearchBox from '../../containers/searchBox'
 import Swiper from 'swiper'; 
 import 'swiper/dist/css/swiper.css';
 import { fetchGet } from '../../api/axios'
@@ -109,9 +109,8 @@ class Shop extends Component {
     })
   }
   navToSort = () => {
-    console.log(this.props.history)
     this.props.history.push({
-      pathname: '/sort'
+      pathname: '/shop/sort'
     })
   }
   render() {

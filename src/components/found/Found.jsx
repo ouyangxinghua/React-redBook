@@ -28,6 +28,7 @@ class Found extends Component {
       <div className="Found-container">
         <CardList list={listData} type={type} />
       </div>
+      
     );
   }
 }

@@ -40,7 +40,7 @@ class App extends Component {
               <Route path="/shop" component={Shop} />
               <Route path="/message" component={Message} />
               <Route path="/mine" component={Mine} />
-              <Route path="/sort" component={Sort} />
+              <Route path="/shop/sort" component={Sort} />
               <Route path="/peopleDetail/:id" component={peopleDetail} />
               <Route path="/" render={() => {
                 return false ?

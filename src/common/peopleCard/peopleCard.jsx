@@ -10,7 +10,8 @@ class PeopleCard extends Component {
       isStar: true
     }
   }
-  isStar() {
+  isStar(e) {
+    e.stopPropagation();
     this.setState({
       isStar: !this.state.isStar
     })
@@ -47,7 +48,7 @@ class PeopleCard extends Component {
             <div className="name">
               {item.author}
             </div>
-            <div className="star" onClick={() => { this.isStar() }}>
+            <div className="star" onClick={(e) => { this.isStar(e) }}>
               <img src={isStar ? [require("../../assets/images/心.png")] : [require("../../assets/images/选中心.png")]} alt="" />
               <span>{item.starNum}</span>
             </div>

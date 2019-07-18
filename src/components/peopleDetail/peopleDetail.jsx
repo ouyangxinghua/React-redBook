@@ -25,7 +25,6 @@ class PeopleDetail extends Component {
     }
   }
   componentWillMount(){
-    console.log(this.props.location.query.data)
     this.setState({
       data: this.props.location.query.data
     })
@@ -67,7 +66,6 @@ class PeopleDetail extends Component {
   }
   render() {
     let item = this.state.data;
-    console.log(item)
     return (
       <div className="people-detail">
         <div className="people-header">

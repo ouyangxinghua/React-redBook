@@ -12,7 +12,6 @@ class Focus extends Component {
   }
   componentDidMount() {
     fetchGet('/focus').then((res) => {
-      // console.log(res.data.listData)
       this.setState({
         listData: res.data.listData,
         header: res.data.header,
@@ -20,12 +19,26 @@ class Focus extends Component {
       })
     })
   }
+  // onTouchStart(e){
+  //   console.log('nba')
+  //   e.stopImmediatePropagation();
+  // }
+  // onTouchMove(e) {
+  //   e.stopImmediatePropagation();
+  // }
+  // onDrag(e){
+  //   e.stopImmediatePropagation();
+  // }
   render() {
     const { listData, header, show } = this.state;
     return (
       show ? <Loading title="正在加载中..." show={this.state.show}></Loading> :
         <div className="focus-container">
-          <div className="focus-items">
+          <div className="focus-items"
+            // onTouchStart={(e) => this.onTouchStart(e)}
+            // onTouchMove={(e) => this.onTouchMove(e)}
+            // onTouchEnd={(e) => this.onDrag(e)}
+            >
             {
               header.map((item, index) => {
                 return (
