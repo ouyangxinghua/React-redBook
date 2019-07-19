@@ -1,29 +1,45 @@
 import axios from 'axios';
+import * as MOCK from "./mock.js"
 
 axios.defaults.timeout = 5000
-axios.defaults.baseURL = 'https://www.easy-mock.com/mock/5d293e9731ae7d5eda23314f/redBookApp'
+axios.defaults.baseURL = 'http://localhost:3000'
 
-// axios.interceptors.response.use((res) => {
-//   if (res.data.code !== 200){
-//     window.alert('网络异常....')
-//     return Promise.reject(res)
-//   }
-//   return res
-// },(error) => {
-//   window.alert('网络异常....')
-//   return Promise.reject(error)
-// })
+axios.interceptors.response.use((res) => {
+  if (res.data.data.code !== 200) {
+    window.alert('网络异常....')
+    return Promise.reject(res)
+  }
+  return res
+}, (error) => {
+  window.alert('网络异常....')
+  return Promise.reject(error)
+})
 
-export function fetchGet(url){
+function fetchGet(url) {
   return new Promise((resolve, reject) => {
     axios.get(url)
-    .then(response => {
-      resolve(response.data)
-    },err => {
-      reject(err)
-    })
-    .catch(error => {
-      reject(error)
-    })
+      .then(response => {
+        resolve(response.data)
+      }, err => {
+        reject(err)
+      })
+      .catch(error => {
+        reject(error)
+      })
   })
+}
+
+export const API = {
+  getFound:() => {
+    return fetchGet(MOCK.found)  //请求首页发现页面数据
+  },
+  getFocus:() => {
+    return fetchGet(MOCK.focus)  //请求首页关注页面数据
+  },
+  getCity:() => {
+    return fetchGet(MOCK.city)  //请求首页城市页面数据
+  },
+  getShop:() => {
+    return fetchGet(MOCK.shop)  //请求商城首页数据
+  }
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import CartList from '../cardList/cardList'
-import { fetchGet } from '../../api/axios'
+import { API } from '../../api/axios'
 import Loading from '../../common/loading/loading'
 import './focus.styl';
 
@@ -11,7 +11,7 @@ class Focus extends Component {
     show: true
   }
   componentDidMount() {
-    fetchGet('/focus').then((res) => {
+    API.getFocus().then(res => {
       this.setState({
         listData: res.data.listData,
         header: res.data.header,

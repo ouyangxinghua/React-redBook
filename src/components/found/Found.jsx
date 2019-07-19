@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import './found.styl';
 import CardList from '../cardList/cardList'
 import Loading from '../../common/loading/loading'
-import { fetchGet } from '../../api/axios'
-// 0.4320
+import { API } from '../../api/axios'
+
 class Found extends Component {
   constructor(props) {
     super(props);
@@ -14,7 +14,7 @@ class Found extends Component {
     }
   };
   componentDidMount() {
-    fetchGet('/found').then((res) => {
+    API.getFound().then(res => {
       this.setState({
         listData: res.data.listData,
         show: false

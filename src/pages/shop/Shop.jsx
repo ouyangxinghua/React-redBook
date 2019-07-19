@@ -3,7 +3,7 @@ import { Route } from 'react-router-dom';
 import SearchBox from '../../containers/searchBox'
 import Swiper from 'swiper';
 import 'swiper/dist/css/swiper.css';
-import { fetchGet } from '../../api/axios'
+import { API } from '../../api/axios'
 import Loading from '../../common/loading/loading'
 import './shop.styl';
 import SideBar from '../../common/sidebar/sidebar'
@@ -78,7 +78,7 @@ class Shop extends Component {
   }
   componentDidMount() {
     this.windowOnScroll();
-    fetchGet('/shop').then((res) => {
+    API.getShop().then(res => {
       this.setState({
         swiper: res.data.swiper,
         show: false

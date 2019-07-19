@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { fetchGet } from '../../api/axios'
+import { API } from '../../api/axios'
 import CartList from '../cardList/cardList';
 import Loading from '../../common/loading/loading'
 import './city.styl';
@@ -12,8 +12,7 @@ class City extends Component {
     show: true
   }
   componentDidMount() {
-    fetchGet('/city').then((res) => {
-      // console.log(res.data.listData)
+    API.getCity().then(res => {
       this.setState({
         listData: res.data.listData,
         header: res.data.header,
