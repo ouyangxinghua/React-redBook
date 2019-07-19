@@ -21,13 +21,17 @@ class Focus extends Component {
   }
   // onTouchStart(e){
   //   console.log('nba')
-  //   e.stopImmediatePropagation();
+  //   // e.preventDefault()
+  //   e.stopPropagation();
+  //   // e.stopImmediatePropagation();
   // }
   // onTouchMove(e) {
-  //   e.stopImmediatePropagation();
+  //   console.log('nba2')
+  //   e.stopPropagation();
   // }
   // onDrag(e){
-  //   e.stopImmediatePropagation();
+  //   console.log('nba3')
+  //   e.stopPropagation();
   // }
   render() {
     const { listData, header, show } = this.state;
