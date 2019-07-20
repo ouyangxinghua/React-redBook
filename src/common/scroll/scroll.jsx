@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import BScroll from 'better-scroll';
 import './scroll.styl';
-// <Scroll>
-// </Scroll> 包起来
 
 class Scroll extends Component {
   state = {  }
@@ -14,13 +12,8 @@ class Scroll extends Component {
   componentDidMount() {
     if (!this.bscroll){
       this.bscroll = new BScroll(this.refs.scrollView, {
-        // eventPassthrough: 'horizontal',
         probeType: 3,
         click: () => {}
-      })
-      this.bscroll.on('scroll', (e) => {
-        // console.log(e)
-        this.props.onScroll(e)
       })
     }
   }

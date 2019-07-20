@@ -41,5 +41,11 @@ export const API = {
   },
   getShop:() => {
     return fetchGet(MOCK.shop)  //请求商城首页数据
+  },
+  getSort:() => {
+    return fetchGet(MOCK.sort)  //请求分类页面数据
+  },
+  getShopList: () => {
+    return fetchGet(MOCK.shopList) //请求商品列表数据
   }
 }

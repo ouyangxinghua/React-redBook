@@ -1,6 +1,7 @@
 .sort-container
+  position relative
   width 100%
-  height 100%
+  height 100vh
   .sort-header
     position relative
     width 100%
@@ -19,7 +20,7 @@
   .sort-sidebar
     font-size: 12px
     box-sizing: border-box
-    width 80px
+    width 23%
     height calc(100% - 40px)
     background-color #fff
     position fixed
@@ -35,3 +36,37 @@
       background-color #fff
     .Active
       background-color #f4f9f8
+  .sort-content
+    box-sizing: border-box
+    position absolute
+    top 50px
+    right 10px
+    background-color #fff
+    width 70%
+    height calc(100% - 50px)
+    overflow-y: scroll
+    .sort-content__items
+      box-sizing: border-box
+      padding-left 20px
+      padding-top 10px
+      width 100%;
+      white-space: pre-wrap
+      .sort-content__item
+        margin-top 20px
+        width 100%
+        .sort-content__text
+          font-size: 13px
+        .flex-box
+          margin-top 15px
+          display inline-block
+          width 30%
+          .sort-content__it
+            display: flex
+            flex-direction: column
+            justify-content: center
+            align-items center
+            .sort-item__pic
+              width 40px
+              height 60px
+            .sort-item__name
+              font-size: 11px

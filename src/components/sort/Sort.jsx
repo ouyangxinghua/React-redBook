@@ -1,37 +1,84 @@
 import React, { Component } from 'react';
-import './sort.styl'
+import './sort.styl';
+import Loading from '../../common/loading/loading';
+import Scroll from '../../common/scroll/scroll'
+import { API } from '../../api/axios'
 
 class Sort extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      refreshScroll: false,
+      show: true,
       currentTap: 0,
-      data: {
-        tab: ['护肤','彩妆','个人护理','保健品','母婴','包包', '配饰','服装','内衣家居服', '鞋靴', '家具','家电数码','美食','运动','宠物'],
-        leftList: {
-          "护肤":[
-
-          ]
-        }
-      }
+      cateList: []
     }
   }
   componentDidMount() {
+    API.getSort().then(res => {
+      this.setState({
+        cateList: res.data.cateList,
+        refreshScroll: true,
+        show: false
+      })
+    })
     this.props.hideTabbar(false)
   }
   handleback = () => {
     window.history.back();
   }
-  componentWillUnmount(){
+  componentWillUnmount() {
     this.props.hideTabbar(true)
   }
-  handleTab(index){
+  handleTab(index) {
     this.setState({
       currentTap: index
     })
   }
+  renderSidebar() {
+    const { cateList, show } = this.state;
+    return (
+      show ? <div></div> :
+        cateList.map((item, index) => {
+          return (
+            <div key={index}
+              className={index === this.state.currentTap ? 'sort-sidebar__item Active' : 'sort-sidebar__item'}
+              onClick={() => this.handleTab(index)}>
+              {item.name}
+            </div>
+          )
+        })
+    )
+  }
+  renderLeft() {
+    const { cateList, show, currentTap } = this.state;
+    return (
+      show ? <Loading title="正在加载中..." show={this.state.show}></Loading> :
+        cateList[currentTap].leftCateList.map((item, index) => {
+          return (
+            <div className="sort-content__item" key={index}>
+              <p className="sort-content__text">{item.sort}</p>
+              {
+                item.list.map((item, index) => {
+                  return (
+                    <div className="flex-box" key={index}>
+                      <div className="sort-content__it" key={index}>
+                        <div className="sort-item__pic">
+                          <img src={item.pic} alt="" />
+                        </div>
+                        <div className="sort-item__name">{item.name}</div>
+                      </div>
+                    </div>
+                  )
+                })
+              }
+            </div>
+          )
+        })
+    )
+  }
   render() {
-    const { data } = this.state;
+    const { refreshScroll } = this.state;
     return (
       <div className="sort-container">
         <div className="sort-header">
@@ -39,21 +86,15 @@ class Sort extends Component {
             onClick={this.handleback} />
           <div>分类</div>
         </div>
-          <div className="sort-sidebar">
-            {
-              data.tab.map((item, index) => {
-                return (
-                  <div key={index}
-                  className={index === this.state.currentTap ? 'sort-sidebar__item Active' : 'sort-sidebar__item'}
-                  onClick={() => this.handleTab(index)}>
-                    {item}
-                  </div>
-                )
-              })
-            }
-          </div>
+        <div className="sort-sidebar">
+          {this.renderSidebar()}
+        </div>
         <div className="sort-content">
-          nba2
+          <Scroll refresh={refreshScroll}>
+            <div className="sort-content__items">
+              {this.renderLeft()}
+            </div>
+          </Scroll>
         </div>
       </div>
     );
