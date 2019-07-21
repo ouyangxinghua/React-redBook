@@ -26,7 +26,7 @@ class PeopleDetail extends Component {
   }
   componentWillMount(){
     this.setState({
-      data: this.props.location.query.data
+      data: this.props.location.query && this.props.location.query.data
     })
   }
   componentWillUnmount() {

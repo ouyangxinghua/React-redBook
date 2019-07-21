@@ -1,25 +1,24 @@
 import React, { Component } from 'react';
 import './shoplist.styl'
-import ShopDetail from '../../components/shopDetail/shopDetail'
-import { withRouter, Route } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
 class ShopList extends Component {
   state = {}
-  handleTodetail = (url) => {
-    console.log(url)
+  handleTodetail = (url , index) => {
     this.props.history.push({
-      pathname: url
+      pathname: url,
+      query: {data: this.props.list[index]}
     })
   }
   render() {
-    const { list, match } = this.props;
+    const { list } = this.props;
     return (
       <div className="shoplist-container">
         <div>
           {
             list.map((item, index) => {
               return (
-                <div className="shoplist-container__item" key={index} onClick={() => this.handleTodetail(`${match.url}/shopDetail`)}>
+                <div className="shoplist-container__item" key={index} onClick={() => this.handleTodetail(`shopDetail/${list[index].goodId}`, index)}>
                   <div className="shopList-pic">
                     <img src={item.pic} alt="" />
                   </div>
@@ -49,7 +48,6 @@ class ShopList extends Component {
             })
           }
         </div>
-        <Route path={`${match.url}/shopDetail`} component={ShopDetail}></Route>
       </div>
     );
   }

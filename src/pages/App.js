@@ -6,6 +6,7 @@ import Message from './message/Message';
 import Mine from './mine/Mine';
 import Sort from '../containers/Sort';
 import peopleDetail from '../containers/peopleDetail'
+import ShopDetail from '../containers/shopDetail'
 import './App.styl';
 import { connect } from 'react-redux';
 
@@ -42,6 +43,7 @@ class App extends Component {
               <Route path="/mine" component={Mine} />
               <Route path="/sort" component={Sort} />
               <Route path="/peopleDetail/:id" component={peopleDetail} />
+              <Route path="/shopDetail/:id" component={ShopDetail}/>
               <Route path="/" render={() => {
                 return false ?
                   <div>home</div> : <Redirect to={{

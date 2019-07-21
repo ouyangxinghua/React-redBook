@@ -1,8 +1,96 @@
 .shopDetail-container
-  position: fixed
-  top: 0
-  left: 0
-  right: 0
-  bottom: 0
-  background-color: #212121
-  z-index: 1000
+  width 100%
+  height 100%
+  overflow-y: scroll
+  .shopDetail-back
+    width 30px
+    height 30px
+    background-color rgba(0,0,0,0.5)
+    border-radius: 50%
+    display: flex
+    justify-content center
+    align-items: center
+    position fixed
+    top: 20px
+    left 20px
+    z-index 10
+    img 
+      width 20px
+      height 20px
+  .shopDetail-zhuan
+    width 30px
+    height 30px
+    background-color rgba(0,0,0,0.5)
+    border-radius: 50%
+    display: flex
+    justify-content center
+    align-items: center
+    position fixed
+    top: 20px
+    right 20px
+    z-index 10
+    img 
+      width 20px
+      height 20px
+  #swipershop
+    position: static
+    #scrollshop
+      height 400px
+  .detail-message
+    padding 15px 15px
+    background-color #fff
+    div
+      display: flex
+      justify-content flex-start
+      align-items: center
+      .detail-message1
+        padding 2px
+        background-color red
+        color #fff
+        border-radius: 2px
+        font-size: 10px
+      .detail-message2
+        color red
+        font-size: 16px
+        font-weight bolder
+      .detail-message3
+        font-size: 10px
+        color rgba(0,0,0,0.6)
+        text-decoration: line-through
+      .detail-message4
+        font-size: 10px
+        color rgba(0,0,0,0.6)
+      .detail-message5
+        font-size: 10px
+        padding 2px
+        border-radius: 2px
+        border: 1px solid rgba(0,0,0,0.6)
+        color: red
+      .margin
+        margin-right 5px
+    .detail-title
+      position relative
+      margin-top 10px
+      line-height 1.5
+      .line-clamp1
+        width 70%
+        word-break: break-all;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical; 
+        -webkit-line-clamp: 1; 
+        overflow: hidden; 
+      .detail-title__right
+        position absolute
+        top 4px
+        right 0
+        color: rgba(0,0,0,0.6)
+        font-size: 10px
+        display: flex
+        justify-content center
+        align-items: center
+        flex-direction: column
+        .detail-title__icon
+          width 30px
+          height 20px
+
