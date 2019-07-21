@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Swiper from 'swiper';
 import 'swiper/dist/css/swiper.css';
 import './shopDetail.styl'
+// import Scroll from '../../common/scroll/scroll'
 
 class ShopDetail extends Component {
   state = {
@@ -32,6 +33,7 @@ class ShopDetail extends Component {
     const item = this.state.data;
     console.log(item)
     return (
+      // <Scroll>
       <div className="shopDetail-container">
         <div className="shopDetail-back" onClick={() => this.handleBack()}>
           <img src={[require('../../assets/shopDetail/左箭头.png')]} alt="" />
@@ -53,7 +55,7 @@ class ShopDetail extends Component {
           </div>
         </div>
         <div className="detail-message">
-          <div>
+          <div className="detail-message__flex">
             <div className="detail-message1 margin">限时特价</div>
             <div className="detail-message2 margin">￥{item.price}</div>
             <div className="detail-message3 margin">￥{item.price1}</div>
@@ -62,15 +64,44 @@ class ShopDetail extends Component {
             <div className="detail-message5">包邮</div>
           </div>
           <div className="detail-title">
-            {item.title}
-            <div className="line-clamp1">{item.message}</div>
+            <p className="line-clamp1">{item.title}</p>
+            <p className="line-clamp2">{item.message}</p>
             <div className="detail-title__right">
               <img src={[require('../../assets/shopDetail/bao.png')]} alt="" className="detail-title__icon" />
               <div>心愿单</div>
             </div>
           </div>
         </div>
+        <div className="detail-center">
+          <img src={[require('../../assets/shopDetail/bottom.png')]} alt="" />
+        </div>
+        <div className="shop-carttab">
+          <div className="shop-carttab__left">
+            <div className="shop-left__icon">
+              <img src={[require('../../assets/shopDetail/kefu.png')]} alt="" />
+              <span>客服</span>
+            </div>
+            <div className="shop-left__icon">
+              <img src={[require('../../assets/shopDetail/store.png')]} alt="" />
+              <span>店铺</span>
+            </div>
+            <div className="shop-left__icon">
+              <img src={[require('../../assets/shopDetail/cart.png')]} alt="" />
+              <span>购物车</span>
+            </div>
+          </div>
+          <div className="shop-carttab__right">
+            <div className="shop-operate__tab1" onClick={() => this.showShop()}>
+              加入购物车
+            </div>
+            {/* onClick={() => this.showShop('tab2')} */}
+            <div className="shop-operate__tab2">
+              立即购买
+            </div>
+          </div>
+        </div>
       </div>
+      // </Scroll>
     );
   }
 }

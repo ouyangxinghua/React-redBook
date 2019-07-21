@@ -109,12 +109,17 @@ class Shop extends Component {
       pathname: '/sort'
     })
   }
+  navToShopCart = () => {
+    this.props.history.push({
+      pathname: '/shopcart'
+    })
+  }
   render() {
     const { list, show, header, currentTap } = this.state;
     const { match } = this.props;
     return (
       <div className="shop-container">
-        <div className="shop-card__icon">
+        <div className="shop-card__icon" onClick={() => this.navToShopCart()}>
           <img src={[require("../../assets/images/购物车.png")]} alt="" />
         </div>
         <div className="shop-header">

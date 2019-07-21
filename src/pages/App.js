@@ -7,6 +7,7 @@ import Mine from './mine/Mine';
 import Sort from '../containers/Sort';
 import peopleDetail from '../containers/peopleDetail'
 import ShopDetail from '../containers/shopDetail'
+import ShopCart from '../containers/ShopCart'
 import './App.styl';
 import { connect } from 'react-redux';
 
@@ -25,7 +26,7 @@ class App extends Component {
                   <NavLink to="/shop" activeClassName="selected">商城</NavLink>
                 </div>
                 <button className="open-file">
-                  <img src={[require("../assets/images/添加.png")]} alt="" />
+                  <img src={[require("../assets/images/aaa.png")]} alt="" />
                 </button>
                 <div className="nav-link">
                   <NavLink to="/message" activeClassName="selected">消息</NavLink>
@@ -44,6 +45,7 @@ class App extends Component {
               <Route path="/sort" component={Sort} />
               <Route path="/peopleDetail/:id" component={peopleDetail} />
               <Route path="/shopDetail/:id" component={ShopDetail}/>
+              <Route path="/shopcart" component={ShopCart} />
               <Route path="/" render={() => {
                 return false ?
                   <div>home</div> : <Redirect to={{
