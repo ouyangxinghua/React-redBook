@@ -34,7 +34,7 @@ class ShopCart extends Component {
     const total = this.state.list.map((item) => {
       return item.price * item.num
     })
-    for(let i = 0;i < total.length - 1; i++){
+    for(let i = 0; i < total.length - 1; i++){
        var aa = 0;
        aa = aa + total[i]
     }
