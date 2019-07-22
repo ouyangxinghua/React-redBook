@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux'
 
 const initialState = {
-  showTarbar: true
+  showTarbar: true,
+  shopCarts: []
 }
 
 function showTarbar(showTarbar = initialState.showTarbar, action) {
@@ -12,7 +13,20 @@ function showTarbar(showTarbar = initialState.showTarbar, action) {
       return showTarbar
   }
 }
+function shopCarts(shopCarts = initialState.shopCarts, action) {
+  switch (action.type) {
+    case "ADD_CART":
+      return [
+        action.data,
+        ...shopCarts
+      ]
+    default:
+      return shopCarts
+  }
+}
+
 
 export default combineReducers({
-  showTarbar
+  showTarbar,
+  shopCarts
 })

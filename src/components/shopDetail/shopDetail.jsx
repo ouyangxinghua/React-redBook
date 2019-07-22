@@ -2,8 +2,12 @@ import React, { Component } from 'react';
 import Swiper from 'swiper';
 import 'swiper/dist/css/swiper.css';
 import './shopDetail.styl'
+import { Toast } from 'antd-mobile';
 // import Scroll from '../../common/scroll/scroll'
 
+// function successToast() {
+//   Toast.success('Load success !!!', 1);
+// }
 class ShopDetail extends Component {
   state = {
 
@@ -28,6 +32,27 @@ class ShopDetail extends Component {
   }
   handleBack() {
     window.history.back()
+  }
+  NavToCart = () => {
+    this.props.history.push({
+      pathname: '/shopcart'
+    })
+  }
+  successToast() {
+    Toast.success('添加购物车成功', 1.5);
+  }
+  addToCart(data) {
+    this.successToast()
+    console.log('addToCart成功', data)
+    this.props.addToCart({
+      id: data.goodId,
+      title: data.title,
+      message: data.message,
+      pic: data.pic,
+      price: data.price,
+      num: 1
+    })
+    // this.props.addToCart('fds')
   }
   render() {
     const item = this.state.data;
@@ -85,13 +110,13 @@ class ShopDetail extends Component {
               <img src={[require('../../assets/shopDetail/store.png')]} alt="" />
               <span>店铺</span>
             </div>
-            <div className="shop-left__icon">
+            <div className="shop-left__icon" onClick={this.NavToCart}>
               <img src={[require('../../assets/shopDetail/cart.png')]} alt="" />
               <span>购物车</span>
             </div>
           </div>
           <div className="shop-carttab__right">
-            <div className="shop-operate__tab1" onClick={() => this.showShop()}>
+            <div className="shop-operate__tab1" onClick={() => this.addToCart(item)}>
               加入购物车
             </div>
             {/* onClick={() => this.showShop('tab2')} */}

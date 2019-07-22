@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import peopleDetail from '../components/shopDetail/shopDetail';
-import { hidetarbar } from '../redux/action'
+import ShopDetail from '../components/shopDetail/shopDetail';
+import { hidetarbar, addCart } from '../redux/action'
  
 const mapStateToProps = (state) => {
   return {
@@ -11,7 +11,10 @@ const mapDispatchToProps = (disptch) => {
   return {
     hideTabbar: (status) => {
       disptch(hidetarbar(status));
+    },
+    addToCart: (data) => {
+      disptch(addCart(data))
     }
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(peopleDetail);
+export default connect(mapStateToProps, mapDispatchToProps)(ShopDetail);

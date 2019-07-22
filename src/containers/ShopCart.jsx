@@ -4,7 +4,8 @@ import { hidetarbar } from '../redux/action'
  
 const mapStateToProps = (state) => {
   return {
-    showTarbar: state.showTarbar
+    showTarbar: state.showTarbar,
+    shopCarts: state.shopCarts
   }
 }
 const mapDispatchToProps = (disptch) => {
