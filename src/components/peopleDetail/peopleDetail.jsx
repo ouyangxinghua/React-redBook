@@ -116,9 +116,6 @@ class PeopleDetail extends Component {
             {item.date}
           </div>
         </div>
-        {/* <div className="people-comment">
-          
-        </div> */}
         <div className="bottom-tabbar">
           <div className="bottom-tabbar__input">
             <img src={[require('../../assets/detail1/bi.png')]} alt="" className="bottom-tabbar__icon1" />

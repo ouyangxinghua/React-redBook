@@ -3,15 +3,9 @@ import Swiper from 'swiper';
 import 'swiper/dist/css/swiper.css';
 import './shopDetail.styl'
 import { Toast } from 'antd-mobile';
-// import Scroll from '../../common/scroll/scroll'
 
-// function successToast() {
-//   Toast.success('Load success !!!', 1);
-// }
 class ShopDetail extends Component {
-  state = {
-
-  }
+  state = {}
   componentDidMount() {
     this.props.hideTabbar(false)
     if (!this.mySwiper5) {
@@ -43,20 +37,18 @@ class ShopDetail extends Component {
   }
   addToCart(data) {
     this.successToast()
-    console.log('addToCart成功', data)
     this.props.addToCart({
       id: data.goodId,
       title: data.title,
       message: data.message,
       pic: data.pic,
       price: data.price,
-      num: 1
+      num: 1,
+      select: false
     })
-    // this.props.addToCart('fds')
   }
   render() {
     const item = this.state.data;
-    console.log(item)
     return (
       // <Scroll>
       <div className="shopDetail-container">

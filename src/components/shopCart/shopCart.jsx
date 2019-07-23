@@ -1,47 +1,21 @@
 import React, { Component } from 'react';
 import './shopCart.styl'
 import { withRouter } from 'react-router-dom'
+import { Toast } from 'antd-mobile';
 
 class ShopCart extends Component {
   state = {
     totalPrice: 0,
     isAdmin: true,
-    allSelect: true,
-    list: [
-      {
-        id: '01',
-        title: '西班牙 你的皮肤极度缺水',
-        message: "花颜悦色礼盒水乳液洁面素颜霜水保湿护肤套装",
-        pic: "//h2.appsimg.com/a.appsimg.com/upload/merchandise/pdcvis/108652/2019/0614/9/a4671978-1215-4ad4-a412-1fe2151da864_218x274_70.jpg",
-        price: 49,
-        num: 1,
-        select: false
-      },
-      {
-        id: '01',
-        title: '你的皮肤极度缺水',
-        message: "水乳液洁面素颜霜水保湿护肤套装",
-        pic: "//h2.appsimg.com/a.appsimg.com/upload/merchandise/pdcvis/108652/2019/0614/9/a4671978-1215-4ad4-a412-1fe2151da864_218x274_70.jpg",
-        price: 149,
-        num: 1,
-        select: false
-      }
-    ]
+    allSelect: false,
+    list: []
   }
   componentDidMount() {
-    console.log(this.props)
     this.props.hideTabbar(false)
-    const total = this.state.list.map((item) => {
-      return item.price * item.num
-    })
-    for(let i = 0; i < total.length - 1; i++){
-       var aa = 0;
-       aa = aa + total[i]
-    }
-    console.log(aa)
     this.setState({
-      totalPrice: 0
+      list: this.props.shopCarts
     })
+    this.caclTotal()
   }
   componentWillUnmount() {
     this.props.hideTabbar(true)
@@ -54,10 +28,29 @@ class ShopCart extends Component {
       isAdmin: !this.state.isAdmin
     })
   }
-  handleSelect = () => {
+  handleCancle() {
+    this.successToast()
+    this.state.list.map((item, index) => {
+      if (item.select) {
+        this.state.list.splice(index, 1)
+      }
+      return false
+    })
+    console.log(this.state.list)
     this.setState({
+      list: this.state.list
+    })
+  }
+  handleSelect = () => {
+    const List = this.state.list
+    List.forEach((item) => {
+      item.select = !this.state.allSelect
+    })
+    this.setState({
+      list: List,
       allSelect: !this.state.allSelect
     })
+    this.caclTotal()
   }
   uniqSelect(index) {
     const newList = this.state.list
@@ -65,6 +58,19 @@ class ShopCart extends Component {
     this.setState({
       list: newList
     })
+    var isAll = this.state.list.some(item => {
+      return item.select === false
+    })
+    if (isAll) {
+      this.setState({
+        allSelect: false
+      })
+    } else {
+      this.setState({
+        allSelect: true
+      })
+    }
+    this.caclTotal()
   }
   addNum(index) {
     const newList = this.state.list
@@ -72,6 +78,7 @@ class ShopCart extends Component {
     this.setState({
       list: newList
     })
+    this.caclTotal()
   }
   reduceNum(index) {
     const newList = this.state.list
@@ -85,9 +92,29 @@ class ShopCart extends Component {
         list: newList
       })
     }
+    this.caclTotal()
+  }
+  caclTotal() {
+    const filter = this.state.list.filter((item) => {
+      return item.select === true
+    })
+    const total = filter.map((item) => {
+      return item.price * item.num
+    })
+    var totalPrice = 0
+    for (let i = 0; i < total.length; i++) {
+      totalPrice += total[i]
+    }
+    this.setState({
+      totalPrice: totalPrice
+    })
+  }
+  successToast() {
+    Toast.success('删除成功', 1);
   }
   render() {
-    const { list } = this.state
+    const { list, isAdmin } = this.state
+    let len = list.length;
     return (
       <div className="shopCart-container">
         <div className="shopCart-header">
@@ -96,62 +123,78 @@ class ShopCart extends Component {
           <div className="shopCart-header__middle">购物车</div>
           <div className="shopCart-header__right" onClick={this.handleAdmin.bind(this)}>{this.state.isAdmin ? '管理' : '完成'}</div>
         </div>
-        <div className="shopCart-content">
-          {
-            list.map((item, index) => {
-              return (
-                <div className="content-items" key={index}>
-                  <div className="content-select"
-                    onClick={() => this.uniqSelect(index)}>
-                    <div className={this.state.list[index].select ? "shop-select shop-isSelect" : "shop-select"}></div>
-                  </div>
-                  <div className="content-pic">
-                    <img src={item.pic} alt="" />
-                  </div>
-                  <div className="content-right">
-                    <div className="content-right__top">
-                      <p className="content-right__title">{item.title}</p>
-                      <p>{item.message}</p>
-                    </div>
-                    <div className="content-right__bottom">
-                      <div className="content-right__price">￥{item.price}</div>
-                      <div className="content-right__operate">
-                        <div className="addOrder"
-                        style={this.state.list[index].num === 1 ? {opacity: 0.3} : {}}
-                          onClick={() => this.reduceNum(index)}>
-                          <img src={[require('../../assets/images/jianhao.png')]} alt="" />
+        {
+          len === 0 ?
+            <div className="noCart">
+              <img src={[require("../../assets/images/nocart.png")]} alt="" />
+            </div> :
+            <div>
+              <div className="shopCart-content">
+                {
+                  list.map((item, index) => {
+                    return (
+                      <div className="content-items" key={index}>
+                        <div className="content-select"
+                          onClick={() => this.uniqSelect(index)}>
+                          <div className={this.state.list[index] && this.state.list[index].select ? "shop-select shop-isSelect" : "shop-select"}></div>
                         </div>
-                        <div className="orderNum">{item.num}</div>
-                        <div className="reduceOrder"
-                          onClick={() => this.addNum(index)}>
-                          <img src={[require('../../assets/images/jiahao.png')]} alt="" />
+                        <div className="content-pic">
+                          <img src={item.pic} alt="" />
+                        </div>
+                        <div className="content-right">
+                          <div className="content-right__top">
+                            <p className="content-right__title">{item.title}</p>
+                            <p>{item.message}</p>
+                          </div>
+                          <div className="content-right__bottom">
+                            <div className="content-right__price">￥{item.price}</div>
+                            <div className="content-right__operate">
+                              <div className="addOrder"
+                                style={this.state.list[index].num === 1 ? { opacity: 0.3 } : {}}
+                                onClick={() => this.reduceNum(index)}>
+                                <img src={[require('../../assets/images/jianhao.png')]} alt="" />
+                              </div>
+                              <div className="orderNum">{item.num}</div>
+                              <div className="reduceOrder"
+                                onClick={() => this.addNum(index)}>
+                                <img src={[require('../../assets/images/jiahao.png')]} alt="" />
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
+                    )
+                  })
+                }
+              </div>
+              <div className="shopCart-tab">
+                <div className="shopCart-tab__left"
+                  onClick={this.handleSelect}>
+                  <div className={this.state.allSelect ? "shop-select shop-isSelect" : "shop-select"}></div>
+                  <p>全选</p>
                 </div>
-              )
-            })
-          }
-        </div>
-        <div className="shopCart-tab">
-          <div className="shopCart-tab__left"
-            onClick={this.handleSelect}>
-            <div className={this.state.allSelect ? "shop-select shop-isSelect" : "shop-select"}></div>
-            <p>全选</p>
-          </div>
-          <div className="shopCart-tab__right">
-            结算
-          </div>
-          <div className="shopCart-center">
-            <div className="shopCart-center__top">
-              总计: <span>￥{this.state.totalPrice}</span>
+                {
+                  !isAdmin ? <div className="shopCart-cancle"
+                    onClick={this.handleCancle.bind(this)}>
+                    删除
+                  </div> :
+                    <div>
+                      <div className="shopCart-tab__right">
+                        结算
+                </div>
+                      <div className="shopCart-center">
+                        <div className="shopCart-center__top">
+                          总计: <span>￥{this.state.totalPrice}</span>
+                        </div>
+                        <div className="shopCart-center__bottom">
+                          免运费
+                </div>
+                      </div>
+                    </div>
+                }
+              </div>
             </div>
-            <div className="shopCart-center__bottom">
-              免运费
-            </div>
-          </div>
-        </div>
+        }
       </div>
     );
   }

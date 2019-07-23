@@ -7,8 +7,14 @@ class PeopleCard extends Component {
   constructor(props){
     super(props)
     this.state = {
+      item: [],
       isStar: true
     }
+  }
+  componentWillMount(){
+    this.setState({
+      item: this.props.item
+    })
   }
   isStar(e) {
     e.stopPropagation();
@@ -19,12 +25,11 @@ class PeopleCard extends Component {
   NavToDetail = (url) => {
     this.props.history.push({
       pathname: url,
-      query: {data: this.props.item}
+      query: {data: this.state.item}
     })
   }
   render() {
-    const { item } = this.props;
-    const { isStar } = this.state;
+    const { isStar,item } = this.state;
     return (
       <div className="card-container" onClick={() => this.NavToDetail(`peopleDetail/${item.userId}`)}>
         <div className="card-pic">
