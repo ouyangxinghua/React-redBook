@@ -21,14 +21,13 @@ class Shop extends Component {
       show: true,
       swiper: [],
       header: ['推荐', '家居', '彩妆', '保健', '个护', '护肤'],
-      currentTap: 0,
+      currentTap: 1,
       contentClass: "shop-nav",
     }
   }
   componentDidMount() {
     this.windowOnScroll();
     API.getShop().then(res => {
-      // console.log(res.data.shopList1)
       this.setState({
         list: res.data,
         show: false
@@ -82,7 +81,9 @@ class Shop extends Component {
       }
     }
   }
-  toSlideItem(index) {
+  toSlideItem(e,index) {
+    console.log(e)
+    e.stopPropagation();
     this.mySwiper3.slideTo(index, 300, false);
     this.setState({
       currentTap: index
@@ -169,7 +170,7 @@ class Shop extends Component {
                         header.map((item, index) => {
                           return (
                             <div className={index === currentTap ? 'shop-nav__itemactive' : 'shop-nav__item'} key={index}
-                              onClick={() => this.toSlideItem(index)}>
+                              onClick={(e) => this.toSlideItem(e,index)}>
                               {item}
                             </div>
                           )

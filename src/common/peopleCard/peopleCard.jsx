@@ -25,7 +25,7 @@ class PeopleCard extends Component {
   NavToDetail = (url) => {
     this.props.history.push({
       pathname: url,
-      query: {data: this.state.item}
+      state: {data: this.state.item}
     })
   }
   render() {

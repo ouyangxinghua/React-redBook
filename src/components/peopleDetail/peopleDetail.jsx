@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Swiper from 'swiper';
+import { withRouter } from 'react-router-dom'
 import 'swiper/dist/css/swiper.css';
 import './peopleDetail.styl'
 
@@ -25,8 +26,9 @@ class PeopleDetail extends Component {
     }
   }
   componentWillMount(){
+    console.log(1, this.props.match.params.id);
     this.setState({
-      data: this.props.location.query && this.props.location.query.data
+      data: this.props.location.state && this.props.location.state.data
     })
   }
   componentWillUnmount() {
@@ -141,4 +143,4 @@ class PeopleDetail extends Component {
   }
 }
 
-export default PeopleDetail;
+export default withRouter(PeopleDetail);
