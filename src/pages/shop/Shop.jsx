@@ -102,7 +102,7 @@ class Shop extends Component {
   navToSearch = (url) => {
     this.props.history.push({
       pathname: url,
-      query: { title: this.state.SearchTitle }
+      state: { title: this.state.SearchTitle }
     })
   }
   navToSort = () => {

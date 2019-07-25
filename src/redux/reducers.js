@@ -20,6 +20,37 @@ function shopCarts(shopCarts = initialState.shopCarts, action) {
         action.data,
         ...shopCarts
       ]
+    case "CANCLE_CART":
+      return action.data
+    case "ADD_SHOP":
+      return shopCarts.map((list) => {
+        if (action.data === list.id) {
+          return { ...list, num: list.num + 1 }
+        }
+        return list
+      })
+    case "REDUCE_SHOP":
+      return shopCarts.map((list) => {
+        if (action.data === list.id) {
+          if (list.num === 1) {
+            return { ...list, num: 1 }
+          } else {
+            return { ...list, num: list.num - 1 }
+          }
+        }
+        return list
+      })
+    case "SELECT":
+      return shopCarts.map((list) => {
+        if (action.data === list.id) {
+          return { ...list, select: !list.select }
+        }
+        return list
+      })
+    case "ALLSELECT":
+      return shopCarts.map((list) => {
+        return { ...list, select: !list.select}
+      })
     default:
       return shopCarts
   }

@@ -2,7 +2,6 @@ import axios from 'axios';
 import * as MOCK from "./mock.js"
 
 axios.defaults.timeout = 5000
-axios.defaults.baseURL = 'http://localhost:3000'
 
 axios.interceptors.response.use((res) => {
   if (res.data.data.code !== 200) {

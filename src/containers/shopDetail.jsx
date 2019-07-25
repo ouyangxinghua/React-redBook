@@ -1,10 +1,11 @@
 import { connect } from 'react-redux';
 import ShopDetail from '../components/shopDetail/shopDetail';
-import { hidetarbar, addCart } from '../redux/action'
+import { hidetarbar,addCart } from '../redux/action'
  
 const mapStateToProps = (state) => {
   return {
-    showTarbar: state.showTarbar
+    showTarbar: state.showTarbar,
+    shopCarts: state.shopCarts
   }
 }
 const mapDispatchToProps = (disptch) => {

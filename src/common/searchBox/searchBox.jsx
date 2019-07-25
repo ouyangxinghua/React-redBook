@@ -13,7 +13,7 @@ class searchBox extends Component {
     this.props.hideTabbar(false)
     let getItem =  (localStorage.getItem("title") && localStorage.getItem("title").split(',').reverse()) || []
     this.setState({
-      placeholder: (this.props.location.query && this.props.location.query.title) || '请输入内容',
+      placeholder: this.props.location.state && this.props.location.state.title,
       SearchHistory: getItem
     })
   }

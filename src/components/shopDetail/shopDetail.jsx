@@ -18,7 +18,8 @@ class ShopDetail extends Component {
   }
   componentWillMount() {
     this.setState({
-      data: this.props.location.query && this.props.location.query.data
+      data: this.props.location.state && this.props.location.state.data,
+      shopNum: this.props.shopCarts.length
     })
   }
   componentWillUnmount() {
@@ -46,11 +47,14 @@ class ShopDetail extends Component {
       num: 1,
       select: false
     })
+    let shopNum = this.props.shopCarts.length;
+    this.setState({
+      shopNum: shopNum + 1
+    })
   }
   render() {
     const item = this.state.data;
     return (
-      // <Scroll>
       <div className="shopDetail-container">
         <div className="shopDetail-back" onClick={() => this.handleBack()}>
           <img src={[require('../../assets/shopDetail/左箭头.png')]} alt="" />
@@ -102,23 +106,25 @@ class ShopDetail extends Component {
               <img src={[require('../../assets/shopDetail/store.png')]} alt="" />
               <span>店铺</span>
             </div>
-            <div className="shop-left__icon" onClick={this.NavToCart}>
+            <div className="shop-left__icon shopCart-num1" onClick={this.NavToCart}>
               <img src={[require('../../assets/shopDetail/cart.png')]} alt="" />
               <span>购物车</span>
+              {
+                this.state.shopNum !== 0 ?
+                <div className="shopCart-num">{this.state.shopNum}</div> : <div></div>
+              }
             </div>
           </div>
           <div className="shop-carttab__right">
             <div className="shop-operate__tab1" onClick={() => this.addToCart(item)}>
               加入购物车
             </div>
-            {/* onClick={() => this.showShop('tab2')} */}
             <div className="shop-operate__tab2">
               立即购买
             </div>
           </div>
         </div>
       </div>
-      // </Scroll>
     );
   }
 }

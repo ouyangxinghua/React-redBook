@@ -26,7 +26,6 @@ class PeopleDetail extends Component {
     }
   }
   componentWillMount(){
-    console.log(1, this.props.match.params.id);
     this.setState({
       data: this.props.location.state && this.props.location.state.data
     })

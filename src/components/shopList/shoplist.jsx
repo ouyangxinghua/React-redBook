@@ -7,7 +7,7 @@ class ShopList extends Component {
   handleTodetail = (url , index) => {
     this.props.history.push({
       pathname: url,
-      query: {data: this.props.list[index]}
+      state: {data: this.props.list[index]}
     })
   }
   render() {

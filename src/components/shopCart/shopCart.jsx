@@ -12,16 +12,13 @@ class ShopCart extends Component {
   }
   componentDidMount() {
     this.props.hideTabbar(false)
-    this.setState({
-      list: this.props.shopCarts
-    })
     this.caclTotal()
   }
   componentWillUnmount() {
     this.props.hideTabbar(true)
   }
   handleback() {
-    window.history.go(-2)
+    window.history.back()
   }
   handleAdmin() {
     this.setState({
@@ -30,72 +27,59 @@ class ShopCart extends Component {
   }
   handleCancle() {
     this.successToast()
-    this.state.list.map((item, index) => {
-      if (item.select) {
-        this.state.list.splice(index, 1)
-      }
-      return false
-    })
-    console.log(this.state.list)
-    this.setState({
-      list: this.state.list
-    })
+    const List = JSON.parse(JSON.stringify(this.props.shopCarts))
+    if (this.state.allSelect) {
+      const newList = []
+      this.props.cancle(newList)
+    } else {
+      List.map((item, index) => {
+        if (item.select) {
+          List.splice(index, 1)
+        }
+        return false
+      })
+      this.props.cancle(List)
+    }
+    console.log(this.props.shopCarts)
   }
   handleSelect = () => {
-    const List = this.state.list
-    List.forEach((item) => {
-      item.select = !this.state.allSelect
-    })
+    this.props.allselect()
     this.setState({
-      list: List,
       allSelect: !this.state.allSelect
     })
     this.caclTotal()
   }
   uniqSelect(index) {
-    const newList = this.state.list
-    newList[index].select = !this.state.list[index].select
-    this.setState({
-      list: newList
-    })
-    var isAll = this.state.list.some(item => {
+    this.props.select(index)
+    const newList = JSON.parse(JSON.stringify(this.props.shopCarts))
+    let isAll = newList.some(item => {
       return item.select === false
     })
     if (isAll) {
       this.setState({
-        allSelect: false
+        allSelect: true
       })
     } else {
       this.setState({
-        allSelect: true
+        allSelect: false
       })
     }
     this.caclTotal()
   }
+  componentDidUpdate(){
+    console.log(this.props.shopCarts)
+  }
   addNum(index) {
-    const newList = this.state.list
-    newList[index].num = this.state.list[index].num + 1
-    this.setState({
-      list: newList
-    })
+    this.props.addShopNum(index)
     this.caclTotal()
   }
   reduceNum(index) {
-    const newList = this.state.list
-    if (this.state.list[index].num === 1) {
-      this.setState({
-        list: newList
-      })
-    } else {
-      newList[index].num = this.state.list[index].num - 1
-      this.setState({
-        list: newList
-      })
-    }
+    this.props.reduceShopNum(index)
     this.caclTotal()
   }
   caclTotal() {
-    const filter = this.state.list.filter((item) => {
+    console.log(this.props.shopCarts)
+    const filter = this.props.shopCarts.filter((item) => {
       return item.select === true
     })
     const total = filter.map((item) => {
@@ -113,7 +97,8 @@ class ShopCart extends Component {
     Toast.success('删除成功', 1);
   }
   render() {
-    const { list, isAdmin } = this.state
+    const { isAdmin } = this.state
+    const list = this.props.shopCarts
     let len = list.length;
     return (
       <div className="shopCart-container">
@@ -135,8 +120,8 @@ class ShopCart extends Component {
                     return (
                       <div className="content-items" key={index}>
                         <div className="content-select"
-                          onClick={() => this.uniqSelect(index)}>
-                          <div className={this.state.list[index] && this.state.list[index].select ? "shop-select shop-isSelect" : "shop-select"}></div>
+                          onClick={() => this.uniqSelect(item.id)}>
+                          <div className={this.props.shopCarts[index] && this.props.shopCarts[index].select ? "shop-select shop-isSelect" : "shop-select"}></div>
                         </div>
                         <div className="content-pic">
                           <img src={item.pic} alt="" />
@@ -150,13 +135,13 @@ class ShopCart extends Component {
                             <div className="content-right__price">￥{item.price}</div>
                             <div className="content-right__operate">
                               <div className="addOrder"
-                                style={this.state.list[index].num === 1 ? { opacity: 0.3 } : {}}
-                                onClick={() => this.reduceNum(index)}>
+                                style={this.props.shopCarts[index].num === 1 ? { opacity: 0.3 } : {}}
+                                onClick={() => this.reduceNum(item.id)}>
                                 <img src={[require('../../assets/images/jianhao.png')]} alt="" />
                               </div>
                               <div className="orderNum">{item.num}</div>
                               <div className="reduceOrder"
-                                onClick={() => this.addNum(index)}>
+                                onClick={() => this.addNum(item.id)}>
                                 <img src={[require('../../assets/images/jiahao.png')]} alt="" />
                               </div>
                             </div>
