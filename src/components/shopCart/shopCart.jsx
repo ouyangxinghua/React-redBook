@@ -15,9 +15,6 @@ class ShopCart extends Component {
       list:  (JSON.parse(localStorage.getItem('list')) && JSON.parse(localStorage.getItem('list'))) || []
     })
   }
-  componentWillUpdate(){
-    console.log('componentWillUpdate')
-  }
   componentDidMount() {
     this.props.hideTabbar(false)
     this.caclTotal()

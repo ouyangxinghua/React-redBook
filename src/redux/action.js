@@ -3,36 +3,6 @@ function hidetarbar(status){
     type: "HIDE_TABBAR", status
   }
 }
-// function addCart(data){
-//   return {
-//     type: "ADD_CART", data
-//   }
-// }
-// function cancleCart(data){
-//   return {
-//     type: "CANCLE_CART", data
-//   }
-// }
-// function addShop(data){
-//   return {
-//     type: "ADD_SHOP",data
-//   }
-// }
-// function reduceShop(data){
-//   return {
-//     type: "REDUCE_SHOP",data
-//   }
-// }
-// function Select(data){
-//   return {
-//     type: "SELECT",data
-//   }
-// }
-// function allSelect(data){
-//   return {
-//     type: "ALLSELECT", data
-//   }
-// }
 
 
 

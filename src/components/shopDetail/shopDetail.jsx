@@ -47,15 +47,6 @@ class ShopDetail extends Component {
       num: 1,
       select: false
     }
-    // this.props.addToCart({
-    //   id: data.goodId,
-    //   title: data.title,
-    //   message: data.message,
-    //   pic: data.pic,
-    //   price: data.price,
-    //   num: 1,
-    //   select: false
-    // })
     let list = JSON.parse(localStorage.getItem('list')) || []
     list.push(listItem)
     localStorage.setItem('list', JSON.stringify(list))

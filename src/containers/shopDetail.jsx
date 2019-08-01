@@ -4,8 +4,7 @@ import { hidetarbar } from '../redux/action'
  
 const mapStateToProps = (state) => {
   return {
-    showTarbar: state.showTarbar,
-    shopCarts: state.shopCarts
+    showTarbar: state.showTarbar
   }
 }
 const mapDispatchToProps = (disptch) => {
@@ -13,9 +12,6 @@ const mapDispatchToProps = (disptch) => {
     hideTabbar: (status) => {
       disptch(hidetarbar(status));
     }
-    // addToCart: (data) => {
-    //   disptch(addCart(data))
-    // }
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ShopDetail);
