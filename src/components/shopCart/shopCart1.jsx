@@ -4,22 +4,20 @@ import { withRouter } from 'react-router-dom'
 import { Toast } from 'antd-mobile';
 
 class ShopCart extends Component {
-  state = {
-    totalPrice: 0,
-    isAdmin: true,
-    allSelect: false,
-    list: []
-  }
-  componentWillMount(){
-    this.setState({
-      list:  (JSON.parse(localStorage.getItem('list')) && JSON.parse(localStorage.getItem('list'))) || []
-    })
-  }
-  componentWillUpdate(){
-    console.log('componentWillUpdate')
+  constructor(props){
+    super(props);
+    this.state = {
+      totalPrice: 0,
+      isAdmin: true,
+      allSelect: false,
+      list: []
+    }
   }
   componentDidMount() {
     this.props.hideTabbar(false)
+    this.setState({
+      list: this.props.shopCarts
+    })
     this.caclTotal()
   }
   componentWillUnmount() {
@@ -28,6 +26,11 @@ class ShopCart extends Component {
   handleback() {
     window.history.back()
   }
+  componentWillReceiveProps(){
+    this.setState({
+      list: this.props.shopCarts
+    })
+  }
   handleAdmin() {
     this.setState({
       isAdmin: !this.state.isAdmin
@@ -35,31 +38,39 @@ class ShopCart extends Component {
   }
   handleCancle() {
     this.successToast()
-    let newList = JSON.parse(localStorage.getItem('list'))
-    newList.map((item, index) => {
+    let aa = JSON.parse(JSON.stringify(this.state.list))
+    aa.map((item, index) => {
       if (item.select) {
-        newList.splice(index, 1)
+        aa.splice(index, 1)
       }
       return false
     })
-    localStorage.setItem('list', JSON.stringify(newList))
+    console.log(this.state.list)
+    this.setState({
+      list: aa
+    })
   }
   handleSelect = () => {
-    const List = JSON.parse(localStorage.getItem('list'))
-    List.forEach((item) =>{
+    const List = JSON.parse(JSON.stringify(this.state.list));
+    List.forEach((item) => {
       item.select = !this.state.allSelect
     })
     this.setState({
+      // list: List,
       allSelect: !this.state.allSelect
-    },
-    localStorage.setItem('list', JSON.stringify(List))
-    )
+    },() => {
+      this.props.allselect(List)
+    })
     this.caclTotal()
   }
   uniqSelect(index) {
-    const newList = JSON.parse(localStorage.getItem('list'))
+    const newList = JSON.parse(JSON.stringify(this.state.list));
     newList[index].select = !newList[index].select;
-    let isAll = newList.some(item => {
+    this.props.select(newList)
+    // this.setState({
+    //   list: newList
+    // })
+    var isAll = newList.some(item => {
       return item.select === false
     })
     if (isAll) {
@@ -71,27 +82,39 @@ class ShopCart extends Component {
         allSelect: true
       })
     }
-    localStorage.setItem('list', JSON.stringify(newList))
     this.caclTotal()
   }
-  addNum(index) {
-    const newList = JSON.parse(localStorage.getItem('list'))
+  addNum(e,index) {
+    e.stopPropagation();
+    const newList = JSON.parse(JSON.stringify(this.state.list));
     newList[index].num = newList[index].num + 1;
-    localStorage.setItem('list', JSON.stringify(newList))
+    // this.props.addShopNum(newList)
+    console.log(this.props.shopCarts[index])
+    this.setState({
+      list: newList
+    })
     this.caclTotal()
   }
-  reduceNum(index) {
-    const newList = JSON.parse(localStorage.getItem('list'))
+  reduceNum(e,index) {
+    e.stopPropagation();
+    const newList = JSON.parse(JSON.stringify(this.state.list));
     if (newList[index].num === 1) {
-      newList[index].num = 1
+      this.props.reduceShopNum(newList)
+      // this.setState({
+      //   list: newList
+      // })
     } else {
       newList[index].num = newList[index].num - 1
+      this.props.reduceShopNum(newList)
+      // this.setState({
+      //   list: newList
+      // })
     }
-    localStorage.setItem('list', JSON.stringify(newList))
     this.caclTotal()
   }
   caclTotal() {
-    const filter = JSON.parse(localStorage.getItem('list')).filter((item) => {
+    const newList = JSON.parse(JSON.stringify(this.state.list))
+    const filter = newList.filter((item) => {
       return item.select === true
     })
     const total = filter.map((item) => {
@@ -109,8 +132,7 @@ class ShopCart extends Component {
     Toast.success('删除成功', 1);
   }
   render() {
-    const { isAdmin } = this.state;
-    const list = JSON.parse(localStorage.getItem('list'));
+    const { list, isAdmin } = this.state
     let len = list.length;
     return (
       <div className="shopCart-container">
@@ -133,7 +155,7 @@ class ShopCart extends Component {
                       <div className="content-items" key={index}>
                         <div className="content-select"
                           onClick={() => this.uniqSelect(index)}>
-                          <div className={list[index] && list[index].select ? "shop-select shop-isSelect" : "shop-select"}></div>
+                          <div className={this.state.list[index] && this.state.list[index].select ? "shop-select shop-isSelect" : "shop-select"}></div>
                         </div>
                         <div className="content-pic">
                           <img src={item.pic} alt="" />
@@ -147,13 +169,13 @@ class ShopCart extends Component {
                             <div className="content-right__price">￥{item.price}</div>
                             <div className="content-right__operate">
                               <div className="addOrder"
-                                style={list[index].num === 1 ? { opacity: 0.3 } : {}}
-                                onClick={() => this.reduceNum(index)}>
+                                style={this.state.list[index].num === 1 ? { opacity: 0.3 } : {}}
+                                onClick={(e) => this.reduceNum(e,index)}>
                                 <img src={[require('../../assets/images/jianhao.png')]} alt="" />
                               </div>
                               <div className="orderNum">{item.num}</div>
                               <div className="reduceOrder"
-                                onClick={() => this.addNum(index)}>
+                                onClick={(e) => this.addNum(e,index)}>
                                 <img src={[require('../../assets/images/jiahao.png')]} alt="" />
                               </div>
                             </div>

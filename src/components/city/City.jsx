@@ -27,7 +27,7 @@ class City extends Component {
       show ? <Loading title="正在加载中..." show={this.state.show}></Loading> :
         <Scroll>
           <div className="city">
-            <div className="header-items" tou>
+            <div className="header-items">
               {
                 header.map((item, index) => {
                   return (

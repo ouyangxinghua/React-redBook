@@ -19,7 +19,7 @@ class ShopDetail extends Component {
   componentWillMount() {
     this.setState({
       data: this.props.location.state && this.props.location.state.data,
-      shopNum: this.props.shopCarts.length
+      shopNum: (JSON.parse(localStorage.getItem('list')) && JSON.parse(localStorage.getItem('list')).length) || 0
     })
   }
   componentWillUnmount() {
@@ -38,7 +38,7 @@ class ShopDetail extends Component {
   }
   addToCart(data) {
     this.successToast()
-    this.props.addToCart({
+    let listItem = {
       id: data.goodId,
       title: data.title,
       message: data.message,
@@ -46,10 +46,22 @@ class ShopDetail extends Component {
       price: data.price,
       num: 1,
       select: false
-    })
-    let shopNum = this.props.shopCarts.length;
+    }
+    // this.props.addToCart({
+    //   id: data.goodId,
+    //   title: data.title,
+    //   message: data.message,
+    //   pic: data.pic,
+    //   price: data.price,
+    //   num: 1,
+    //   select: false
+    // })
+    let list = JSON.parse(localStorage.getItem('list')) || []
+    list.push(listItem)
+    localStorage.setItem('list', JSON.stringify(list))
+    let shopNum = (JSON.parse(localStorage.getItem('list')) && JSON.parse(localStorage.getItem('list')).length) || 0;
     this.setState({
-      shopNum: shopNum + 1
+      shopNum: shopNum
     })
   }
   render() {
