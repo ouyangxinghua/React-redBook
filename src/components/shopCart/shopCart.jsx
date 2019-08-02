@@ -10,9 +10,9 @@ class ShopCart extends Component {
     allSelect: false,
     list: []
   }
-  componentWillMount(){
+  componentWillMount() {
     this.setState({
-      list:  (JSON.parse(localStorage.getItem('list')) && JSON.parse(localStorage.getItem('list'))) || []
+      list: (JSON.parse(localStorage.getItem('list')) && JSON.parse(localStorage.getItem('list'))) || []
     })
   }
   componentDidMount() {
@@ -33,23 +33,26 @@ class ShopCart extends Component {
   handleCancle() {
     this.successToast()
     let newList = JSON.parse(localStorage.getItem('list'))
-    newList.map((item, index) => {
-      if (item.select) {
-        newList.splice(index, 1)
-      }
-      return false
-    })
-    localStorage.setItem('list', JSON.stringify(newList))
+    if (this.state.allSelect) {
+      newList = [];
+      localStorage.setItem('list', JSON.stringify(newList))
+    } else {
+      var newArr = newList.filter(item => {
+        return item.select === false
+      })
+      localStorage.setItem('list', JSON.stringify(newArr))
+    }
+    this.caclTotal()
   }
   handleSelect = () => {
     const List = JSON.parse(localStorage.getItem('list'))
-    List.forEach((item) =>{
+    List.forEach((item) => {
       item.select = !this.state.allSelect
     })
     this.setState({
       allSelect: !this.state.allSelect
     },
-    localStorage.setItem('list', JSON.stringify(List))
+      localStorage.setItem('list', JSON.stringify(List))
     )
     this.caclTotal()
   }

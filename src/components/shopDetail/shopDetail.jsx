@@ -48,8 +48,21 @@ class ShopDetail extends Component {
       select: false
     }
     let list = JSON.parse(localStorage.getItem('list')) || []
-    list.push(listItem)
-    localStorage.setItem('list', JSON.stringify(list))
+    var isExist = list.some(item => {
+      return item.id === listItem.id
+    })
+    if(isExist){
+      var newArr = list.map((item,index) => {
+        if(item.id === listItem.id){
+          list[index].num += 1
+        }
+        return list
+      })
+      localStorage.setItem('list', JSON.stringify(newArr))
+    }else{
+      list.push(listItem)
+      localStorage.setItem('list', JSON.stringify(list))
+    }
     let shopNum = (JSON.parse(localStorage.getItem('list')) && JSON.parse(localStorage.getItem('list')).length) || 0;
     this.setState({
       shopNum: shopNum
