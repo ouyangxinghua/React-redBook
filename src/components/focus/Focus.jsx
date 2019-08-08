@@ -3,6 +3,7 @@ import CartList from '../cardList/cardList'
 import Scroll from '../../common/scroll/scroll'
 import { API } from '../../api/axios'
 import Loading from '../../common/loading/loading'
+import { forceCheck } from 'react-lazyload';
 import './focus.styl';
 
 class Focus extends Component {
@@ -38,7 +39,7 @@ class Focus extends Component {
     const { listData, header, show } = this.state;
     return (
       show ? <Loading title="正在加载中..." show={this.state.show}></Loading> :
-        <Scroll>
+        <Scroll onScroll={forceCheck}>
           <div className="focus-container">
             <div className="focus-items"
             // onTouchStart={(e) => this.onTouchStart(e)}

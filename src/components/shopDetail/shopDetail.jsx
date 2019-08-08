@@ -38,29 +38,29 @@ class ShopDetail extends Component {
   }
   addToCart(data) {
     this.successToast()
-    let listItem = {
-      id: data.goodId,
-      title: data.title,
-      message: data.message,
-      pic: data.pic,
-      price: data.price,
-      num: 1,
-      select: false
-    }
-    let list = JSON.parse(localStorage.getItem('list')) || []
-    var isExist = list.some(item => {
-      return item.id === listItem.id
+    const list = JSON.parse(localStorage.getItem('list')) || []
+    let isExist = list.some(item => {
+      return item.id === data.goodId
     })
     if(isExist){
       var newArr = list.map((item,index) => {
-        if(item.id === listItem.id){
-          list[index].num += 1
+        if(item.id === data.goodId){
+          item.num += 1;
         }
-        return list
+        return item
       })
       localStorage.setItem('list', JSON.stringify(newArr))
     }else{
-      list.push(listItem)
+      console.log(list)
+      list.push({
+        id: data.goodId,
+        title: data.title,
+        message: data.message,
+        pic: data.pic,
+        price: data.price,
+        num: 1,
+        select: false
+      })
       localStorage.setItem('list', JSON.stringify(list))
     }
     let shopNum = (JSON.parse(localStorage.getItem('list')) && JSON.parse(localStorage.getItem('list')).length) || 0;

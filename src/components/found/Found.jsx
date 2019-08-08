@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './found.styl';
+import { forceCheck } from 'react-lazyload';
 import CardList from '../cardList/cardList'
 import Scroll from '../../common/scroll/scroll'
 import Loading from '../../common/loading/loading'
@@ -26,7 +27,7 @@ class Found extends Component {
     const { type, listData = {}, show } = this.state
     return (
       show ? <Loading title="正在加载中..." show={this.state.show}></Loading> :
-        <Scroll>
+        <Scroll onScroll={forceCheck}>
           <div className="Found-container">
             <CardList list={listData} type={type} />
           </div>

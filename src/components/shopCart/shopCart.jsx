@@ -91,7 +91,8 @@ class ShopCart extends Component {
     this.caclTotal()
   }
   caclTotal() {
-    const filter = JSON.parse(localStorage.getItem('list')).filter((item) => {
+    const list = JSON.parse(localStorage.getItem('list')) || []
+    const filter = list.filter((item) => {
       return item.select === true
     })
     const total = filter.map((item) => {
@@ -110,7 +111,7 @@ class ShopCart extends Component {
   }
   render() {
     const { isAdmin } = this.state;
-    const list = JSON.parse(localStorage.getItem('list'));
+    const list = JSON.parse(localStorage.getItem('list')) || [];
     let len = list.length;
     return (
       <div className="shopCart-container">

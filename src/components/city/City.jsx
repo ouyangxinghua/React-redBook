@@ -4,6 +4,7 @@ import Scroll from '../../common/scroll/scroll'
 import CartList from '../cardList/cardList';
 import Loading from '../../common/loading/loading'
 import './city.styl';
+import { forceCheck } from 'react-lazyload';
 
 class City extends Component {
   state = {
@@ -25,7 +26,7 @@ class City extends Component {
     const { listData, type, header, show } = this.state
     return (
       show ? <Loading title="正在加载中..." show={this.state.show}></Loading> :
-        <Scroll>
+        <Scroll onScroll={forceCheck}>
           <div className="city">
             <div className="header-items">
               {

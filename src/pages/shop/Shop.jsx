@@ -27,6 +27,7 @@ class Shop extends Component {
   }
   componentDidMount() {
     this.windowOnScroll();
+    var that = this;
     API.getShop().then(res => {
       this.setState({
         list: res.data,
@@ -52,7 +53,10 @@ class Shop extends Component {
             autoHeight: true,
             on: {
               slideChangeTransitionStart: function () {
-                // var index = this.activeIndex;
+                var index = this.activeIndex;
+                that.setState({
+                  currentTap: index
+                })
               },
             },
           })
@@ -82,7 +86,7 @@ class Shop extends Component {
     }
   }
   toSlideItem(e,index) {
-    console.log(e)
+    console.log('点击了')
     e.stopPropagation();
     this.mySwiper3.slideTo(index, 300, false);
     this.setState({

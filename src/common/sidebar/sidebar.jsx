@@ -55,7 +55,8 @@ class SideBar extends Component {
         <div className={`shop-bgc ${show ? 'shop-bgc__enter' : 'shop-bgc__active'}`}
           onClick={() => {
             this.props.getState(showsidebar)
-          }}></div>
+          }}
+          style={show ? {zIndex: 100} : {zIndex: -1}}></div>
         <div className={`side-container ${show ? 'enter' : 'active'}`}>
           <div className="side-container__title">
             更多
