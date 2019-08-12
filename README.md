@@ -23,18 +23,24 @@ UI框架: swiper + better-scroll + antd-mobile
 
 # 项目运行截图和录屏
 
-## 截图
-![](./screenshot/首页.png)
-![](./screenshot/首页详情.png)
-![](./screenshot/shop.png)
-![](./screenshot/sidebar.png)
-![](./screenshot/商品详情.png)
-![](./screenshot/shopCart.png)
-![](./screenshot/sort.png)
-## 录屏
-![](./screenshot/首页.mp4)
-![](./screenshot/搜索.mp4)
-![](./screenshot/商城页操作.mp4)
-![](./screenshot/添加购物车.mp4)
-![](./screenshot/购物车操作.mp4)
-![](./screenshot/滚动吸顶效果.mp4)
+## 项目截图
+<figure class="half">
+    <img src="./screenshot/首页.png"  width="300" height="550">
+    <img src="./screenshot/首页详情.png" width="300" height="550">
+    <img src="./screenshot/shop.png" width="300" height="550">
+    <img src="./screenshot/sidebar.png" width="300" height="550">
+    <img src="./screenshot/商品详情.png" width="300" height="550">
+    <img src="./screenshot/shopCart.png" width="300" height="550">
+    <img src="./screenshot/sort.png" width="300" height="550">
+</figure>
+
+## 项目录屏
+
+<figure class="half">
+    <img src="./screenshot/首页.gif"  width="300" height="550">
+    <img src="./screenshot/搜索.gif" width="300" height="550">
+    <img src="./screenshot/商城页操作.gif" width="300" height="550">
+    <img src="./screenshot/添加购物车.gif" width="300" height="550">
+    <img src="./screenshot/购物车操作.gif" width="300" height="550">
+    <img src="./screenshot/滚动吸顶效果.gif" width="300" height="550">
+</figure>
