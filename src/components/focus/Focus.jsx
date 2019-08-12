@@ -21,20 +21,6 @@ class Focus extends Component {
       })
     })
   }
-  // onTouchStart(e){
-  //   console.log('nba')
-  //   // e.preventDefault()
-  //   e.stopPropagation();
-  //   // e.stopImmediatePropagation();
-  // }
-  // onTouchMove(e) {
-  //   console.log('nba2')
-  //   e.stopPropagation();
-  // }
-  // onDrag(e){
-  //   console.log('nba3')
-  //   e.stopPropagation();
-  // }
   render() {
     const { listData, header, show } = this.state;
     return (
@@ -42,9 +28,6 @@ class Focus extends Component {
         <Scroll onScroll={forceCheck}>
           <div className="focus-container">
             <div className="focus-items"
-            // onTouchStart={(e) => this.onTouchStart(e)}
-            // onTouchMove={(e) => this.onTouchMove(e)}
-            // onTouchEnd={(e) => this.onDrag(e)}
             >
               {
                 header.map((item, index) => {

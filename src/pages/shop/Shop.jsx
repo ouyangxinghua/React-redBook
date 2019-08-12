@@ -21,7 +21,7 @@ class Shop extends Component {
       show: true,
       swiper: [],
       header: ['推荐', '家居', '彩妆', '保健', '个护', '护肤'],
-      currentTap: 1,
+      currentTap: 0,
       contentClass: "shop-nav",
     }
   }

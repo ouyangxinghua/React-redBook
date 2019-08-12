@@ -3,6 +3,7 @@ import './sort.styl';
 import Loading from '../../common/loading/loading';
 import Scroll from '../../common/scroll/scroll'
 import { API } from '../../api/axios'
+import { forceCheck } from 'react-lazyload';
 
 class Sort extends Component {
   constructor(props) {
@@ -90,7 +91,7 @@ class Sort extends Component {
           {this.renderSidebar()}
         </div>
         <div className="sort-content">
-          <Scroll refresh={refreshScroll}>
+          <Scroll refresh={refreshScroll} onScroll={forceCheck}>
             <div className="sort-content__items">
               {this.renderLeft()}
             </div>
