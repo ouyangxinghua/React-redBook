@@ -37,10 +37,16 @@ UI框架: swiper + better-scroll + antd-mobile
 ## 项目录屏
 
 <figure class="half">
+    <h3>首页</h3>
     <img src="./screenshot/首页.gif"  width="300" height="550">
+    <h3>搜索页</h3>
     <img src="./screenshot/搜索.gif" width="300" height="550">
+    <h3>商城页操作</h3>
     <img src="./screenshot/商城页操作.gif" width="300" height="550">
+    <h3>添加购物车</h3>
     <img src="./screenshot/添加购物车.gif" width="300" height="550">
+    <h3>订单操作</h3>
     <img src="./screenshot/购物车操作.gif" width="300" height="550">
+    <h3>滚动吸顶效果</h3>
     <img src="./screenshot/滚动吸顶效果.gif" width="300" height="550">
 </figure>
