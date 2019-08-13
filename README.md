@@ -5,7 +5,7 @@ git add .<br>
 git commit -m 'Saving before ejecting'<br>
 npm run eject  运行npm run eject生成配置文件(解压 webpack 配置)<br>
 
-# React实战小红书App
+# React实战小红书App(含截图和录屏)
 
 ## 技术栈
 技术栈: React + ES6 + redux + axios + stylus + webpack + react-lazyload<br>
